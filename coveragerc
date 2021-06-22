@@ -1,0 +1,6 @@
+[run]
+omit =
+    *migrations*,
+    *tests*,
+    mysite*
+    conftest.py
