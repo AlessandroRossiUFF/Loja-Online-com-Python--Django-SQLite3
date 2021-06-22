@@ -41,13 +41,16 @@ INSTALLED_APPS = [
     
     # Apps de terceiros
     'debug_toolbar',
-    #'widget_tweaks',
+    'widget_tweaks',
+    'crispy_forms',
+    'localflavor',
 
     # My apps
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +148,20 @@ MEDIA_ROOT = (
 
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
+
+
+# django-debug
+
+import socket  # noqa
+
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+
+# Cart
+
+CART_SESSION_ID = "cart"
+CART_ITEM_MAX_QUANTITY = 20
+
+# Crispy
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
