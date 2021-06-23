@@ -42,12 +42,15 @@ INSTALLED_APPS = [
     # Apps de terceiros
     'debug_toolbar',
     'widget_tweaks',
+    'crispy_forms',
+    'localflavor',
 
     # My apps
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +153,5 @@ CART_ITEM_MAX_QUANTITY = 20
 
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
+
+CRISPY_TEMPLATE_PACK = 'boostrap4'
