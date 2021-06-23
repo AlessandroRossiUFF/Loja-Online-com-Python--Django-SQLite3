@@ -64,12 +64,5 @@ class Cart:
             Decimal(item["price"]) * item["quantity"] for item in self.cart.values()
         )
 
-
-    def clear(self):
-        del self.session[settings.CART_SESSION_ID]
-        self.save() # LImpa o carrinho
-
-
-
     def save(self):
         self.session.modified = True
