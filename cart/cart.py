@@ -8,6 +8,7 @@ from products.models import Product
 from .forms import CartAddProductForm
 
 
+
 class Cart:
     def __init__(self, request):
         if request.session.get(settings.CART_SESSION_ID) is None:
@@ -23,11 +24,16 @@ class Cart:
         for product in products:
             cart[str(product.id)]["product"] = product
 
+
+
+
+        #item["volume"] = 0
         for item in cart.values():
             item["price"] = Decimal(item["price"])
             item["total_price"] = item["quantity"] * item["price"]
             item["update_quantity_form"] = CartAddProductForm(
                 initial={"quantity": item["quantity"], "override": True}
+            #item["volume"] = item["quantity"]
             )
 
             yield item
@@ -64,6 +70,16 @@ class Cart:
         return sum(
             Decimal(item["price"]) * item["quantity"] for item in self.cart.values()
         )
+
+
+
+      
+    def get_preco_frete(self):
+        volume = sum(item["quantity"] for item in self.cart.values())
+        return volume
+
+
+
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
