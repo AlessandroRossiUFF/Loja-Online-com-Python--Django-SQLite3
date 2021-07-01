@@ -13,7 +13,7 @@ import requests
 
 
 
-class Cart:
+class Frete:
     def __init__(self, request):
         if request.session.get(settings.CART_SESSION_ID) is None:
             request.session[settings.CART_SESSION_ID] = {}
@@ -128,3 +128,4 @@ def get_preco(self):
           txt = child.text
         i+=1
     return txt
+

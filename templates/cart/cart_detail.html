@@ -1,3 +1,6 @@
+
+
+
 {% extends 'base.html' %}
 
 {% load static %}
@@ -29,7 +32,7 @@
                 <td class="align-middle">
                     <a target="_blank" class="text-decoration-none" href="{{ product.get_absolute_url }}">
                         {{ product.name }}
-                    </a>
+                    </a> 
                 </td>
                 <td class="align-middle">
                     <form action="{% url 'cart:add' product.id %}" method="post">
@@ -62,17 +65,37 @@
             <tr class="bg-light">
                 <td class="font-weight-bold">Total</td>
                 <td></td>
-                <td></td>
+                <td></td>                          
                 <td class="font-weight-bold">R$ {{ cart.get_total_price }}</td>
+                <td></td>
+            </tr>
+
+
+            <tr class="bg-light">
+                <td class="font-weight-bold">Frete</td>
+                <td></td>
+                <td></td>
+                <td class="font-weight-bold" id="frete">R$ {{ cart.get_preco_frete }}</td>
                 <td></td>
             </tr>
 
 
         </tbody>
     </table>
+
+            <p class="text-right">
+              <a class="font-weight-bold" >
+              <input name="sCepOrigem" type="text">
+              </a>
+              <a class="btn btn-success {% if not cart %}disabled{% endif %}" id="calcular">
+                Calcular frete
+              </a>
+            </p>
+
     {% else %}
     <p>O carrinho está vazio!</p>
     {% endif %}
+
 
 
 
@@ -83,26 +106,48 @@
         </a>
 
 
-        <a class="btn btn-primary {% if not cart %}disabled{% endif %}" href="{% url 'orders:create' %}">
-            Calcular frete
-        </a>
-
-
         <a class="btn btn-success {% if not cart %}disabled{% endif %}" href="{% url 'orders:create' %}">
             Finalizar compra
         </a>
     </p>
 
+    <input type="button" value="anonymous function" onclick="(function(v){
+document.getElementById("frete").innerHTML = 2;
+    })('ok')">
+
 
     <p class="text-right">
-        <a class="text-right">
-            Preço Frete
+        <a class="text-right"
+        R$ {{ cart.get_total_price }} 
         </a>
+
+
     </p>
     
-
-
-
 </div>
 
 {% endblock content %}
+
+
+{% block script %}
+<script import xml.etree.ElementTree as ET
+import requests
+import json
+url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=08082650&sDsSenha=564321&sCepOrigem=70002900&sCepDestino=04547000&nVlPeso=1&nCdFormato=1&nVlComprimento=20&nVlAltura=30&nVlLargura=20&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=04510&nVlDiametro=0&StrRetorno=xml&nIndicaCalculo=3"
+header = { 'Accept': 'application/xml' }
+r = requests.get(url, headers=header)
+tree =  ET.ElementTree(ET.fromstring(r.content))
+root = tree.getroot()
+filtro = "*"
+i = 0
+for child in root.iter(filtro):
+    if(i==3):
+      precoFrete = child.text
+    i+=1
+$('#calcular').click(function(){
+  $('#resultado').html("O valor é: ");
+};
+></script>
+<script i = {{ cart.get_total_price }}></script>
+{% endblock script %}
+
