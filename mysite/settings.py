@@ -146,11 +146,11 @@ MEDIA_ROOT = (
 )
 
 
-# Cart
+# Cart 
 
+FRETE_SESSION_ID = "frete"
 CART_SESSION_ID = "cart"
 CART_ITEM_MAX_QUANTITY = 20
-CART_SESSION_CEP = ""
 
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'

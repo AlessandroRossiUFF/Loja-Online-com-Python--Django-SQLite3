@@ -1,0 +1,20 @@
+{
+  "files": {
+    "README.md": [
+      {
+        "id": "a7a88a44-7dac-4180-b583-53614a3a2b28",
+        "line": 19,
+        "version": 1,
+        "index": 405
+      }
+    ],
+    "products/models.py": [
+      {
+        "id": "55e2afda-4983-44a8-ad3f-7721a5406713",
+        "line": 19,
+        "version": 64,
+        "index": 540
+      }
+    ]
+  }
+}

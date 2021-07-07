@@ -47,3 +47,8 @@ class Product(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})
+
+class Frete(models.Model):
+  cep = models.CharField(max_length=9)
+  tempo = models.IntegerField()
+  taxa = models.DecimalField(max_digits=10, decimal_places=2)

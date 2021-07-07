@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-from products.models import Product
+from products.models import Product, Frete
 
 from .cart import Cart
 from .forms import CartAddProductForm
@@ -32,3 +32,8 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     cart = Cart(request)
     return render(request, "cart/cart_detail.html", {"cart": cart})
+
+
+def frete_detail(request):
+    frete = Frete(request)
+    return render(request, "cart/cart_detail.html", {"frete": frete})
